@@ -1,1 +1,13 @@
 <p>home works!</p>
+<p>{{titulo}}</p>
+<p>{{array[1]}}</p>
+
+<p *ngFor="let item of array; let i = index"> {{i}} - {{item}}</p> 
+
+<a routerLink="prueba">Ir a prueba</a>
+
+<ul>
+  <li *ngFor="let item of array; let i = index">
+    <a [routerLink]="['/members/persona4/prueba']">{{i}} - {{item}}</a>
+  </li>
+</ul>

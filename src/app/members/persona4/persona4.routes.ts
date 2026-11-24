@@ -6,4 +6,9 @@ export const persona4Routes: Routes = [
     loadComponent: () =>
       import('./pages/home/home').then((module) => module.Home),
   },
+  {
+    path: 'prueba',
+    loadComponent: () =>
+      import('./pages/prueba/prueba').then((module) => module.Prueba),
+  },
 ];
