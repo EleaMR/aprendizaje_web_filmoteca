@@ -58,7 +58,27 @@ src/
     └── app.routes.ts
 ```
 
-`src/environments/environment.ts` está excluido de Git. Si lo necesitas, créalo localmente con la configuración correspondiente; no incluyas claves reales en commits. Las claves usadas desde una aplicación frontend pueden ser visibles para quienes carguen la aplicación.
+Los archivos `src/environments/environment.ts` y `src/environments/environment.development.ts` están excluidos de Git. Angular reemplaza el archivo de producción por el de desarrollo al ejecutar `npm start` o `ng build --configuration development`. No incluyas claves reales en commits.
+
+## Autenticación con TMDB
+
+La aplicación envía el **API Read Access Token** como token `Bearer` en las peticiones a TMDB. Para obtenerlo:
+
+1. Inicia sesión o crea una cuenta en [TMDB](https://www.themoviedb.org/).
+2. Abre [Configuración de API](https://www.themoviedb.org/settings/api) y solicita las credenciales de API si aún no las tienes.
+3. Copia el **API Read Access Token**. No uses la API Key v3 en su lugar.
+4. En tu copia local de `src/environments/environment.development.ts`, sustituye el valor de ejemplo de `tmdbToken`:
+
+```ts
+export const environment = {
+  production: false,
+  tmdbToken: 'PEGA_AQUI_TU_API_READ_ACCESS_TOKEN',
+};
+```
+
+El build de producción (`npm run build`) utiliza `src/environments/environment.ts`, que debe mantener `tmdbToken` sin credenciales locales. Ambos archivos están excluidos de Git: no quites la exclusión ni subas el token a un commit. Al usarse desde Angular en el navegador, el token de desarrollo puede ser visible para quienes carguen la aplicación. Para una aplicación publicada, no lo consideres un secreto; usa un backend intermediario si necesitas mantener las credenciales fuera del cliente.
+
+La [guía oficial de autenticación de aplicaciones](https://developer.themoviedb.org/docs/authentication-application) explica el uso del API Read Access Token. El [flujo para generar un session ID](https://developer.themoviedb.org/reference/authentication-how-do-i-generate-a-session-id) es distinto: requiere autorizar un request token con la cuenta de un usuario y se utiliza para operaciones asociadas a esa cuenta, no para las consultas de lectura que hace actualmente esta aplicación.
 
 ## Build y pruebas
 
