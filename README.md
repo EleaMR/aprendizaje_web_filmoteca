@@ -1,59 +1,75 @@
-# AprendizajeWebFilmoteca
+# Filmoteca
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.3.0.
+Aplicación Angular para organizar el trabajo por persona. La pantalla inicial permite elegir un perfil y abrir su página Home.
 
-## Development server
+## Requisitos
 
-To start a local development server, run:
+- Node.js `26.13.1` (indicado en `.node-version`)
+- npm `11.20.0`
 
-```bash
-ng serve
+Si usas `fnm` en PowerShell, inicializa la sesión y selecciona la versión del proyecto:
+
+```powershell
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+fnm use
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Instalación y desarrollo
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Instala las dependencias:
 
 ```bash
-ng generate component component-name
+npm ci
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Inicia el servidor de desarrollo:
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Abre `http://localhost:4200/`. La aplicación recarga los cambios automáticamente.
 
-To build the project run:
+## Navegación
+
+- `/` muestra el selector.
+- `/persona1` abre el Home de Persona L.
+- `/persona2` abre el Home de Persona A.
+- `/persona3` abre el Home de Persona M.
+- `/persona4` abre el Home de Persona D.
+
+Las páginas de cada persona están bajo `src/app/members/`. Sus rutas se definen en el archivo `personaN.routes.ts` correspondiente y se cargan de forma diferida.
+
+## Estructura principal
+
+```text
+src/
+├── environments/             # Configuración local; no subir claves a Git
+└── app/
+    ├── core/                 # Configuración, interceptores, modelos y utilidades compartidos
+    ├── pages/selector/       # Selector de perfiles
+    ├── members/
+    │   ├── persona1/
+    │   ├── persona2/
+    │   ├── persona3/
+    │   └── persona4/         # Cada persona tiene components, layouts, pages/home,
+    │                         # services, pipes, directives, guards y rutas
+    ├── app.config.ts
+    └── app.routes.ts
+```
+
+`src/environments/environment.ts` está excluido de Git. Si lo necesitas, créalo localmente con la configuración correspondiente; no incluyas claves reales en commits. Las claves usadas desde una aplicación frontend pueden ser visibles para quienes carguen la aplicación.
+
+## Build y pruebas
+
+Crear el build de producción:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Ejecutar las pruebas una vez:
 
 ```bash
-ng test
+npm test -- --watch=false
 ```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
