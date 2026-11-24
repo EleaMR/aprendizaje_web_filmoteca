@@ -1,6 +1,9 @@
 import { provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+
+import { DataService } from '../../core/services/data.service';
 import { routes } from '../../app.routes';
 import { Selector } from './selector';
 
@@ -8,7 +11,10 @@ describe('Selector', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Selector],
-      providers: [provideRouter(routes)],
+      providers: [
+        provideRouter(routes),
+        { provide: DataService, useValue: { get: () => of({ results: [] }) } },
+      ],
     }).compileComponents();
   });
 
@@ -20,10 +26,10 @@ describe('Selector', () => {
 
     expect(links.length).toBe(4);
     expect(Array.from(links, (link: HTMLAnchorElement) => link.textContent?.trim())).toEqual([
-      'Persona 1',
-      'Persona 2',
-      'Persona 3',
-      'Persona 4',
+      'Persona L',
+      'Persona A',
+      'Persona M',
+      'Persona D',
     ]);
   });
 
