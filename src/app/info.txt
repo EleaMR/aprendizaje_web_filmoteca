@@ -1,0 +1,21 @@
+components/ Piezas visuales reutilizables en varias pantallas, sin lógica de negocio: movie-card (póster, título y nota), rating-badge, loading-spinner, pagination, search-box, genre-chip. Reciben datos por input() y emiten eventos con output().
+
+layouts/ El marco que envuelve las páginas: main-layout con cabecera, menú de navegación, <router-outlet> y footer. Si más adelante quieres una zona distinta (por ejemplo, un layout sin menú para un login), iría aquí también.
+
+pages/ Una carpeta por pantalla, cada una asociada a una ruta: home (populares y estrenos), movie-detail (ficha, reparto, tráiler), search-results, favorites, not-found. Las páginas usan componentes y servicios, y deciden qué se muestra.
+
+services/ La lógica y el acceso a datos: movie.service (llamadas a TMDB), favorites.service (estado de favoritos con signals, persistido en localStorage), genre.service. Cada uno con providedIn: 'root'.
+
+pipes/ Transformaciones de presentación: runtime (de 142 a "2h 22min"), poster-url (construye la URL de la imagen a partir de la ruta que devuelve TMDB), rating-percent, truncate para recortar sinopsis largas.
+
+directives/ Comportamiento reutilizable sobre elementos: lazy-image (carga diferida de pósters), click-outside, autofocus. Es probable que al principio esté vacía.
+
+interceptors/ api-key.interceptor (añade la clave a cada petición a TMDB) y error.interceptor (captura errores HTTP y avisa al usuario). Son funciones, no clases.
+
+guards/ Control de acceso a rutas. En este ejercicio quizá no lo necesites, pero podrías practicar uno que impida entrar al detalle si el id no es un número válido.
+
+models/ Las interfaces TypeScript de la API: movie.model, movie-detail.model, genre.model, paginated-response.model. Mejor tipar solo los campos que uses.
+
+utils/ Funciones puras sin Angular: build-image-url, format-date, debounce. Se prueban fácilmente porque no dependen de nada.
+
+config/ Valores fijos: URL base de la API, tamaños de imagen de TMDB, nombres de rutas, número de resultados por página. La API key va en un archivo de entorno aparte y no se sube a Git.

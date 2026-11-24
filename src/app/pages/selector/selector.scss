@@ -1,0 +1,24 @@
+.selector {
+  margin: 3rem auto;
+  max-width: 40rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+nav {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+a {
+  border: 1px solid currentColor;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+}
+
+a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
